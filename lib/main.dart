@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:n8_default_project/ui/home/home_screen.dart';
+import 'package:n8_default_project/data/local/storage_repository.dart';
+import 'package:n8_default_project/data/network/providers/api_provider.dart';
+import 'package:n8_default_project/ui/tab_box/tab_box.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageRepository.getInstance();
+
   runApp(const MyApp());
 }
 
@@ -14,10 +19,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: TabBox(apiProvider: ApiProvider(),),
     );
   }
 }
-
