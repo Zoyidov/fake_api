@@ -15,18 +15,23 @@ class ApiProvider {
   }) async {
     Uri url = Uri.parse('$baseUrl/auth/login');
     try {
-      final response = await http.post(
-        url,
-        body: {
-          {"username": username, "password": password}
-        },
-      );
+      print('ok1');
+      print(jsonEncode({"username": username, "password": password}));
+      final response = await http.post(url,
+          body: {
+            "username": username,
+            "password": password
+          });
+      print('ok2');
+      print(response.statusCode);
       if (response.statusCode == 200) {
         String token = jsonDecode(response.body)["token"];
+
         return UniversalResponse(data: token);
       }
       return UniversalResponse(error: 'Error: Status code not equal to 200');
     } catch (e) {
+      print(e);
       return UniversalResponse(error: e.toString());
     }
   }
@@ -90,10 +95,12 @@ class ApiProvider {
   Future<UniversalResponse> addProduct(ProductModel product) async {
     Uri url = Uri.parse('$baseUrl/products');
     try {
+      print('ok');
       final response = await http.post(
         url,
-        body: product.toJson(),
+        body: jsonEncode(product.toJson()),
       );
+
       if (response.statusCode == 200) {
         return UniversalResponse(
           data: ProductModel.fromJson(

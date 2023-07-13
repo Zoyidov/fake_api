@@ -2,7 +2,7 @@ import 'package:n8_default_project/data/models/product/product_model.dart';
 import 'package:n8_default_project/data/models/universal_model.dart';
 import 'package:n8_default_project/data/network/providers/api_provider.dart';
 
-class ProductRepo {
+class ProductRepo{
   ProductRepo({required this.apiProvider});
 
   final ApiProvider apiProvider;
@@ -27,6 +27,7 @@ class ProductRepo {
   Future<ProductModel?> addProduct(ProductModel productModel) async {
     UniversalResponse universalResponse =
         await apiProvider.addProduct(productModel);
+    print(universalResponse.error);
     if (universalResponse.error.isEmpty) {
       return universalResponse.data as ProductModel;
     }

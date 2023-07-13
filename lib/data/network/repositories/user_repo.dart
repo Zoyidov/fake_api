@@ -8,8 +8,8 @@ class UserRepo {
   final ApiProvider apiProvider;
 
   Future<List<UserModel>> getAllUsers({
-    required String username,
-    required String password,
+     String? username,
+     String? password,
   }) async {
     UniversalResponse universalResponse = await apiProvider.getAllUsers();
     if (universalResponse.error.isEmpty) {

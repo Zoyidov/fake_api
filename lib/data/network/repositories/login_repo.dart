@@ -14,6 +14,7 @@ class LoginRepo {
     UniversalResponse universalResponse =
         await apiProvider.loginUser(username: username, password: password);
     if (universalResponse.error.isEmpty) {
+      return true;
       await StorageRepository.putString("token", universalResponse.data as String);
       return true;
     }

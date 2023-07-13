@@ -19,7 +19,8 @@ class ProductModel {
     required this.rating,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      ProductModel(
         id: json["id"],
         title: json["title"] ?? '',
         price: json["price"]?.toDouble() ?? 0.0,
@@ -29,12 +30,13 @@ class ProductModel {
         rating: json["rating"] != null
             ? RatingModel.fromJson(json["rating"])
             : RatingModel(
-                rate: 0,
-                count: 0,
-              ),
+          rate: 0,
+          count: 0,
+        ),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         "title": title,
         "price": price,
         "description": description,
